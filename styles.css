@@ -1,0 +1,21 @@
+/** {
+    margin: 0
+}*/
+
+.center-text {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    color: blueviolet;
+}
+
+.numbers {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(3, 0.1fr);
+}
+
+.nums {
+    height: 6vh;
+    width: 7vw;
+}
