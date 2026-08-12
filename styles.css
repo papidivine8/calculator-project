@@ -9,6 +9,10 @@
     color: blueviolet;
 }
 
+#final-display {
+    border: 10px
+}
+
 .numbers {
     display: grid;
     justify-content: center;
