@@ -1,11 +1,11 @@
-let numberInput = document.querySelectorAll('.nums');
-
-console.log(numberInput)
+let numberInput = document.querySelectorAll(".nums");
+let finalDisplay = document.getElementById("final-display");
 
 numberInput.forEach(num => {
-    num.addEventListener("click", function() {
-        const outputValue = this.innerText;
-        //console.log(outputValue)
+    num.addEventListener("click", (event) => {
+        const outputValue = event.target.textContent;
+        finalDisplay.textContent += outputValue
+        //alert(`You clicked ${outputValue}`)
     })
 })
 
