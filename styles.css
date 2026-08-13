@@ -21,8 +21,10 @@ body {
 }
 
 .calculate {
+    border: 2px solid black;
     display: grid;
     justify-content: center;
+    align-items: center;
     grid-template-columns: repeat(3, 0.1fr);
 }
 
