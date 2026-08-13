@@ -1,6 +1,6 @@
-/** {
-    margin: 0
-}*/
+* {
+    margin: 0;
+}
 
 body {
     background-color: rgb(104, 103, 103);
@@ -11,28 +11,51 @@ body {
     justify-content: center;
     text-align: center;
     color: rgb(66, 38, 92);
+    margin: 12px;
 }
 
 #final-display {
     border: 1px solid gray;
     border-radius: 2px;
-    width: 200px;
-    height: 30px;
+    margin: 15px auto;
+    justify-content: center;
+    align-items: center;
+    width: 185px;
+    height: 35px;
+    padding: 11px 0 0 18px;
 }
 
 .calculate {
     border: 2px solid black;
+    width: fit-content;
+    margin: 0 auto;
     display: grid;
+    padding: 20px;
+    grid-template-columns: repeat(3, 1fr);
     justify-content: center;
-    align-items: center;
-    grid-template-columns: repeat(3, 0.1fr);
+    gap: 7px;
 }
 
-.numbers {
-    color: rgb(224, 224, 164);
+.boxs {
+    display: contents;
+    
+}
+
+.box {
+    padding: 13px 6px;
+}
+
+.numbers button {
+    background-color: rgb(247, 247, 247);
 }
 
 .nums {
     height: 6vh;
     width: 7vw;
+}
+
+.symbol {
+    height: 6vh;
+    width: 7vw;
+    
 }
