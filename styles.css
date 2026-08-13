@@ -20,10 +20,14 @@ body {
     height: 30px;
 }
 
-.numbers {
+.calculate {
     display: grid;
     justify-content: center;
     grid-template-columns: repeat(3, 0.1fr);
+}
+
+.numbers {
+    color: rgb(224, 224, 164);
 }
 
 .nums {
