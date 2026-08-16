@@ -1,46 +1,84 @@
 const numberInput = document.querySelectorAll(".nums");
 const symbols = document.querySelectorAll(".operation-symbol")
 const finalDisplay = document.getElementById("final-display");
-const equals = document.getElementById("equals");
-let calculate = parseInt(finalDisplay.textContent)
+const equalTo = document.getElementById("equals");
 
-let num1 = 0;
-let num2 = 0;
-let total = "";
+let currentNum = "";
+let operator = "";
+let prevValues = [];
 
-equals.addEventListener("click", (e) => {
-    let final = finalDisplay.textContent.trim()
-    if (final.length === 0) {
-        alert("input empty");
-        return;
+function getNumber (digit) {
+    if (currentNum === "") {
+        currentNum = String(digit);
+    } else {
+        currentNum += digit
     }
-    const result = sumAll(final)
-    finalDisplay.textContent = result
-})
+    return currentNum;
+}
 
-numberInput.forEach(num => {
-    num.addEventListener("click", (event) => {
-        const outputValue = event.target.textContent;
-        finalDisplay.textContent += outputValue
-        //alert(`You clicked ${outputValue}`)
+
+function getOperator (op) {
+    if (currentNum === "") {
+        return
+    }
+    if (currentNum) {
+        prevValues.push(currentNum);
+        switch (op) {
+            case "+":
+                break;
+            case "-":
+                break;
+            case "*":
+                break;
+            case "/":
+                break;
+            prevValues.push(op);
+        }
+    }
+    if (operator !== "") {
+
+    }
+}
+
+
+numberInput.forEach((number) => {
+    number.addEventListener("click", (e) => {
+        const output = e.target.textContent
+        finalDisplay.textContent += output;
+    }) 
+});
+symbols.forEach((symbol) => {
+    symbol.addEventListener("click", (e) => {
+        const output = e.target.textContent
+        finalDisplay.textContent += output;
     })
 })
 
-symbols.forEach(symbol => {
-    symbol.addEventListener("click", (event) => {
-        const outputValue = event.target.textContent;
-        finalDisplay.textContent += outputValue;
+function add(...inputs) {
+    return inputs.reduce((total, current) => {
+        return total + current;
     })
-})
-
-function sumAll (...inputs) {
-    return inputs.reduce((total, current) => total + current, 0);
-
 }
 
-function subtract (...inputs) {
-    //inputs = numberInput
-    return inputs.reduce((tot, current) => tot - current); 
+function subtract(...inputs) {
+    return inputs.reduce((total, current) => {
+        return total - current;
+    })
 }
 
-console.log(subtract(5, 7))
+function divide(...inputs) {
+    return inputs.reduce((total, current) => {
+        return total / current;
+    })
+}
+
+function multiply(...inputs) {
+    return inputs.reduce((total, current) => {
+        return total * current;
+    })
+}
+
+console.log(getNumber(6));
+console.log(getNumber(6));
+console.log(getNumber(4));
+
