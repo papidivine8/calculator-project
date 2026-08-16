@@ -1,5 +1,5 @@
 const numberInput = document.querySelectorAll(".nums");
-const symbols = document.querySelectorAll(".operation-symbol")
+const symbols = document.querySelectorAll(".symbol")
 const finalDisplay = document.getElementById("final-display");
 const equalTo = document.getElementById("equals");
 
@@ -8,49 +8,36 @@ let operator = "";
 let prevValues = [];
 
 function getNumber (digit) {
-    if (currentNum === "") {
-        currentNum = String(digit);
-    } else {
-        currentNum += digit
-    }
+    currentNum += String(digit);
+    finalDisplay.textContent = currentNum;
     return currentNum;
 }
 
-
 function getOperator (op) {
     if (currentNum === "") {
-        return
+        return;
     }
-    if (currentNum) {
-        prevValues.push(currentNum);
-        switch (op) {
-            case "+":
-                break;
-            case "-":
-                break;
-            case "*":
-                break;
-            case "/":
-                break;
-            prevValues.push(op);
-        }
-    }
-    if (operator !== "") {
 
-    }
+    prevValues.push(currentNum);
+    operator = op;
+
+    finalDisplay.textContent = currentNum + operator;
+
+    return operator;
 }
 
-
 numberInput.forEach((number) => {
-    number.addEventListener("click", (e) => {
-        const output = e.target.textContent
-        finalDisplay.textContent += output;
+    const output = number.textContent
+    number.addEventListener("click", () => {
+        getNumber(output);
+        /*const output = e.target.textContent
+        finalDisplay.textContent += output;*/
     }) 
 });
 symbols.forEach((symbol) => {
-    symbol.addEventListener("click", (e) => {
-        const output = e.target.textContent
-        finalDisplay.textContent += output;
+    const output = symbol.textContent
+    symbol.addEventListener("click", () => {
+        getOperator(output)
     })
 })
 
@@ -78,7 +65,5 @@ function multiply(...inputs) {
     })
 }
 
-console.log(getNumber(6));
-console.log(getNumber(6));
-console.log(getNumber(4));
 
+console.log(currentNum);
