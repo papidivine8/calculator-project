@@ -8,9 +8,17 @@ let operator = "";
 let prevValues = [];
 
 function getNumber (digit) {
-    currentNum += String(digit);
-    finalDisplay.textContent = currentNum;
-    return currentNum;
+    if (currentNum === "") {
+        currentNum = String(digit);
+        finalDisplay.textContent += currentNum;
+        return currentNum;
+    }
+
+    if (currentNum) {
+        currentNum += String(digit);
+        finalDisplay.textContent += currentNum;
+        return currentNum;
+    }
 }
 
 function getOperator (op) {
@@ -21,7 +29,8 @@ function getOperator (op) {
     prevValues.push(currentNum);
     operator = op;
 
-    finalDisplay.textContent = currentNum + operator;
+    finalDisplay.textContent = prevValues + operator;
+    currentNum = ""
 
     return operator;
 }
@@ -39,6 +48,35 @@ symbols.forEach((symbol) => {
     symbol.addEventListener("click", () => {
         getOperator(output)
     })
+})
+
+equalTo.addEventListener("click", () => {
+    if (currentNum === "" || operator === "") {
+        return;
+    }
+
+    prevValues.push(currentNum);
+
+    const num1 = Number(prevValues[0]);
+    const num2 = Number(prevValues[1]);
+
+    let result;
+
+    if (operator === "+") {
+        result = add(num1, num2);
+    } else if (operator === "-") {
+        result = subtract(num1, num2);
+    }if (operator === "*") {
+        result = multiply(num1, num2);
+    } if (operator === "/") {
+        result = divide(num1, num2);
+    }
+
+    finalDisplay.textContent = result;
+
+    currentNum = String(result);
+    prevValues = [];
+    operator = "";
 })
 
 function add(...inputs) {
