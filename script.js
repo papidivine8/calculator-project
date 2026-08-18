@@ -6,24 +6,22 @@ const equalTo = document.getElementById("equals");
 let currentNum = "";
 let operator = "";
 let prevNum = "";
+let expression = [];
 
 function updateDisplay () {
-    if (prevNum !== "" && operator !== "") {
-        finalDisplay.textContent = `${prevNum} ${operator} ${currentNum}`.trim();
-    } else {
-        finalDisplay.textContent = currentNum || prevNum
-    }
+    finalDisplay.textContent = expression.join("") || "0";
 }
 
 function getNumber (digit) {
-    if (currentNum === "") {
-        currentNum = String(digit);   
-    } else {
-        currentNum += String(digit);
-    }
-    updateDisplay();
-    return currentNum;
+    currentNum += String(digit);
+    
+        if (expression.length === 0 || ["+", "-", "/", "*"].includes(expression[expression.length - 1])) {
+            expression.push(currentNum);
+        } else {
+            expression[expression.length - 1] = currentNum
+        }
 
+    updateDisplay();
 }
 
 function getOperator (op) {
@@ -31,46 +29,39 @@ function getOperator (op) {
         return;
     }
 
-    /*if (currentNum === "" || prevNum !== "") {
-        operator = op;
-        finalDisplay.textContent = `${prevNum} ${operator}`;
-        return;
-    }*/
-
-    if (prevNum !== "" && currentNum !== "") {
-        calculate();
-    } else if (currentNum !== "") {
-        prevNum = currentNum;
+    if (["+", "-", "/", "*"].includes(expression[expression.length - 1])) {
+        expression[expression.length - 1] = op;
+    } else {
+        expression.push(op);
     }
-    
-    operator = op;
+
+    prevNum = currentNum;
     currentNum = "";
+    operator = op;
+
     updateDisplay();
 }
 
 function calculate () {
-    if (currentNum === "" && operator === "" && prevNum !== "") return
+    if (expression.length === 0) return
 
-    const num1 = Number(prevNum);
-    const num2 = Number(currentNum);
+    let result = Number(expression[0]);
 
-    let result;
+    for (let i = 1; i < expression.length; i+=2) {
+        const op = expression[i];
+        const num = Number(expression[i + 1]);
 
-    if (operator === "+") result = add(num1, num2);
-    else if (operator === "-") result = subtract(num1, num2);
-    else if (operator === "*") result = multiply(num1, num2);
-    else if (operator === "/") {
-        if (num2 === 0) {
-            prevNum = "";
-            currentNum = "";
-            operator = "";
-            return 0;
+        if (op === "+") result += num;
+        else if (op === "-") result -= num;
+        else if (op === "*") result *= num;
+        else if (op === "/") {
+            if (num === 0) {
+                return 0;
+            }
+            result /= num;
         }
-        result = divide(num1, num2);
+        
     }
-    
-    prevNum = String(result);
-    currentNum = "";
 
     return result;
 }
@@ -91,7 +82,7 @@ symbols.forEach((symbol) => {
 })
 
 equalTo.addEventListener("click", () => {
-    if (currentNum === "" || operator === "" || prevNum === "") {
+    if (expression.length < 3) {
         return;
     }
 
@@ -99,35 +90,12 @@ equalTo.addEventListener("click", () => {
 
     finalDisplay.textContent = result;
 
-    currentNum = String(result);
+    expression = [String(result)];
+    currentNum = String[result];
     prevNum = "";
     operator = "";
 })
 
-
-function add(...inputs) {
-    return inputs.reduce((total, current) => {
-        return total + current;
-    })
-}
-
-function subtract(...inputs) {
-    return inputs.reduce((total, current) => {
-        return total - current;
-    })
-}
-
-function divide(...inputs) {
-    return inputs.reduce((total, current) => {
-        return total / current;
-    })
-}
-
-function multiply(...inputs) {
-    return inputs.reduce((total, current) => {
-        return total * current;
-    })
-}
 
 
 console.log(currentNum);
