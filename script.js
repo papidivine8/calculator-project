@@ -2,6 +2,8 @@ const numberInput = document.querySelectorAll(".nums");
 const symbols = document.querySelectorAll(".symbol")
 const finalDisplay = document.getElementById("final-display");
 const equalTo = document.getElementById("equals");
+const clear = document.getElementById("clear");
+const clearAll = document.getElementById("clear-all");
 
 let currentNum = "";
 let operator = "";
