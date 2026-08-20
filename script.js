@@ -98,6 +98,14 @@ equalTo.addEventListener("click", () => {
     operator = "";
 })
 
+clearAll.addEventListener("click", () => {
+    const result = "";
+    finalDisplay.textContent = result;
 
+    expression = [String(result)];
+    currentNum = String[result];
+    prevNum = "";
+    operator = "";
+})
 
 console.log(currentNum);
